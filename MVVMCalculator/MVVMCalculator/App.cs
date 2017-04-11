@@ -4,30 +4,19 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using Xamarin.FormsBook.Toolkit;
+
 
 namespace MVVMCalculator
 {
     public class App : Application
     {
+        AdderViewModel adderViewModel;
         public App()
         {
-            // The root page of your application
-            var content = new ContentPage
-            {
-                Title = "MVVMCalculator",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
-            };
-
-            MainPage = new NavigationPage(content);
+            adderViewModel = new AdderViewModel();
+            adderViewModel.RestoreState(Current.Properties);
+            MainPage = new MVVMCalculatorPage(adderViewModel);
         }
 
         protected override void OnStart()
